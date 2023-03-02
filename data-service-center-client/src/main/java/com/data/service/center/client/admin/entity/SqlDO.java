@@ -6,35 +6,36 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
- * 配置的数据源
+ * sql实体bean
  *
- * @author : wenbo.zhuang
- * @date: 2023/3/2 11:31
- **/
+ * @author wenbo.zhuang
+ * @date 2023/03/02:22:40
+ */
 @Getter
 @Setter
-@ToString(callSuper = true)
-@Table(name = "data_service_center_data_source_config")
-public class DataSourceConfigDO extends BaseEntity {
+@ToString
+@Table(name = "data_service_center_sql")
+public class SqlDO extends BaseEntity {
 
-    private static final long serialVersionUID = -334536119129801448L;
-
-    /**
-     * 数据库url
-     */
-    private String url;
+    private static final long serialVersionUID = -5993069876066168270L;
 
     /**
-     * 数据库用户名
+     * sql所属namespace
      */
-    private String userName;
+    private String nameSpace;
 
     /**
-     * 数据库密码
+     * sql表示ID
      */
-    private String password;
+    private String sqlId;
+
+    /**
+     * sql内容
+     */
+    private String sqlContent;
 
     /**
      * 状态
