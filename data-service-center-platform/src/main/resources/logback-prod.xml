@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <contextName>logback</contextName>
+    <springProperty name="springAppName" scope="context" source="spring.application.name"/>
+    <!-- 定义日志文件的存储地址目录 -->
+    <property name="LOG_HOME" value="/app/log/com.study/"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!-- 定义日志格式，注意指定时区，避免在 Docker 容器中出现日志时间与服务器时间相差八小时的问题 -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS,CTT} [%X{EagleEye-TraceID}] %clr(%5p) %clr([${PID:- }]){magenta} --- %clr([%10.10t]) %clr(%-40.40logger{39}){cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS,CTT} [%X{EagleEye-TraceID}] [%5p] [${PID:- }] --- [%20.20thread] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!-- 为了防止进程退出时，内存中的数据丢失，请加上此选项 -->
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <!-- 日志级别 有高到低 ERROR、WARN、INFO、DEBUG、TRACE -->
+    <!-- 文件错误日志输出 -->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 临界值过滤器，过滤掉低于指定临界值的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 当日志级别低于临界值时，日志会被拒绝 -->
+            <level>ERROR</level>
+        </filter>
+        <!-- 基于日期滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}com-study-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件信息日志输出 -->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 临界值过滤器，过滤掉低于指定临界值的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 当日志级别低于临界值时，日志会被拒绝 -->
+            <level>INFO</level>
+        </filter>
+        <!-- 基于日期和文件大小滚动策略 -->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}digitization.delivery-info.%d{yyyy-MM-dd}[%i].log</fileNamePattern>
+            <maxFileSize>1GB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>-->
+        <!-- 基于日期滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}com-study-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 可用来获取 StatusManager 中的状态 -->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <!-- 解决 DEBUG 模式下循环发送的问题 -->
+    <logger name="org.apache.http.impl.conn.Wire" level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+
+</configuration>

@@ -1,19 +1,56 @@
 spring:
+  profiles:
+    active: local
   application:
     name: data-service-center
-  profiles:
-      active: dev
+  server:
+    port: 8080
   datasource:
-      type: com.alibaba.druid.pool.DruidDataSource
-server:
-  port: 8080
-mybatis:
-  mapper-locations:
-    - classpath:/mappers/**/*.xml
+    type: com.alibaba.druid.pool.DruidDataSource
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  #加载nacos公共配置
+  cloud:
+    nacos:
+      config:
+        extension-configs[0]:
+          data-id: data-service-center.yml
+          group: BIZ_GROUP
+          refresh: true
 
 
+dubbo:
+  application:
+    name: ${spring.application.name}
+  consumer:
+    retries: 0
+    timeout: 1500
+  provider:
+    retries: 0
+    timeout: 1500
+  protocol:
+    port: -1
+    name: dubbo
+    threads: 600
+    threadpool: cached
+    dispatcher: message
 logging:
   level:
-    mapper: debug
-    org:
-      mybatis: debug
+    com.study.application.mapper.*: debug
+    com.alibaba.nacos.client.*: off
+    springfox.documentation.spring.web.readers.operation: off
+management:
+  server:
+    port: 10880
+  health:
+    defaults:
+      enabled: false
+
