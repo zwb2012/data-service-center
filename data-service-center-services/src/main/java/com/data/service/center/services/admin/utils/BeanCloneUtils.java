@@ -31,13 +31,13 @@ public class BeanCloneUtils {
         return src != null && type != null ? JsonSerializer.convertValue(src, type) : null;
     }
 
-    public static void main(String[] args) {
-        Object a = new Object();
-        // 但对象复制
-        Object clone = BeanCloneUtils.clone(a, TypeFactory.defaultInstance().constructType(Object.class));
-        log.info(JSON.toJSONString(clone));
-        // 集合复制
-        clone(Collections.singleton(a), JsonSerializer.toJavaType(new TypeReference<List<Object>>() {
+    public static <T>  List<T> cloneList(Object src, JavaType type) {
+        return clone(src, JsonSerializer.toJavaType(type));
+    }
+
+    public static <T> List<T> cloneList(Object src, Class<T> clazz) {
+        // 多层内嵌 TypeReference< BaseResult<List<T>>> type = new TypeReference<BaseResult<List<T>>>(BaseResult.class, List.class, returnClazz) { };
+        return clone(src, JsonSerializer.toJavaType(new TypeReference<List<T>>(clazz) {
         }.getType()));
     }
 }

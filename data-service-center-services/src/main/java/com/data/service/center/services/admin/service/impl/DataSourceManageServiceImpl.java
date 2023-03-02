@@ -20,6 +20,6 @@ public class DataSourceManageServiceImpl implements DataSourceManageService {
 
     @Override
     public List<DataSourceConfigDO> getAllDataSources() {
-        return dataSourceManageMapper.selectAllDataSources();
+        return dataSourceManageMapper.selectAll();
     }
 }
