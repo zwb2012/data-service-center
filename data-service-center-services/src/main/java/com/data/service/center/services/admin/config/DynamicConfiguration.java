@@ -1,28 +1,25 @@
 package com.data.service.center.services.admin.config;
 
 
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.annotation.PostConstruct;
-
 import com.data.service.center.client.admin.entity.SqlConfigDO;
 import com.data.service.center.client.admin.exception.BusinessException;
 import com.data.service.center.client.admin.exception.DefaultResponseCode;
 import com.data.service.center.client.general.enums.SqlTypeEnum;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.Configuration;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 动态mybatis配置
@@ -31,7 +28,7 @@ import org.springframework.stereotype.Component;
  * @date 2022/11/18:0:41
  */
 @Slf4j
-//@Component
+@Component
 public class DynamicConfiguration extends Configuration {
 
     /**
@@ -41,7 +38,7 @@ public class DynamicConfiguration extends Configuration {
     protected Map<String, MappedStatement> dynamicMappedStatements = new StrictMap<MappedStatement>("Dynamic Mapped Statements collection")
         .conflictMessageProducer((savedValue, targetValue) -> ". please check " + savedValue.getResource() + " and " + targetValue.getResource());
 
-    private final AtomicBoolean inited = new AtomicBoolean(false);
+    private final AtomicBoolean init = new AtomicBoolean(false);
 
     private final BlockingQueue<SqlConfigDO> tasks = new LinkedBlockingQueue<>(1024);
 
@@ -80,7 +77,7 @@ public class DynamicConfiguration extends Configuration {
      */
     @Override
     public void addMappedStatement(MappedStatement ms) {
-        if (!inited.get()) {
+        if (!init.get()) {
             this.dynamicMappedStatements.put(ms.getId(), ms);
         } else {
             Map<String, MappedStatement> mappedStatements =
@@ -93,8 +90,8 @@ public class DynamicConfiguration extends Configuration {
     }
 
     private void refreshLoadSql(SqlConfigDO sqlConfig) throws Exception {
-        if (!inited.get()) {
-            inited.set(true);
+        if (!init.get()) {
+            init.set(true);
         }
         String sqlType = sqlConfig.getSqlType();
         String nameSpace = sqlConfig.getNameSpace();

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author wenbo.zhuang
  * @date 2023/03/02:22:46
  */
+
 @Mapper
 public interface DataSourceManageMapper extends BaseMapper<DataSourceConfigDO> {
 }
