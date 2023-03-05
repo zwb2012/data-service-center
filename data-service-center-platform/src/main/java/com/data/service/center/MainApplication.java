@@ -1,6 +1,5 @@
 package com.data.service.center;
 
-import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;

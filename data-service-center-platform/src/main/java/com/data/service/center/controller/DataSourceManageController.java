@@ -21,10 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/platform/dataSource")
 public class DataSourceManageController {
 
-    @Value("${spring.tst:1}")
-    private String tt;
-
-
     @Resource
     private DataSourceManageService dataSourceManageService;
 

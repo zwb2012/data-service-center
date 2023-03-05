@@ -29,6 +29,7 @@ spring:
   cloud:
     nacos:
       discovery:
+        enabled: true
         # 注册地址，不需要写协议
         server-addr: ${nacos.address}
         # 命名空间，不同命名空间之间不能调用，用于环境隔离
@@ -42,6 +43,7 @@ spring:
         # 比如灰度发布时，可以跨集群调用，但是不能跨版本调用
         # version: v1
       config:
+        enabled: true
         # 配置中心地址，不需要写协议
         server-addr: ${nacos.address}
         # 配置文件扩展后缀

@@ -16,12 +16,14 @@ spring:
       max-request-size: 100MB
   #加载nacos公共配置
   cloud:
+    bootstrap:
+      enabled: true
     nacos:
       config:
-        extension-configs[0]:
-          data-id: data-service-center.yml
-          group: BIZ_GROUP
-          refresh: true
+        extension-configs:
+          - data-id: data-service-center.yml
+            group: BIZ_GROUP
+            refresh: true
 
 
 dubbo:
@@ -42,7 +44,7 @@ dubbo:
 logging:
   level:
     com.study.application.mapper.*: debug
-    com.alibaba.nacos.client.*: off
+    #com.alibaba.nacos.client.*: off
     springfox.documentation.spring.web.readers.operation: off
 management:
   server:

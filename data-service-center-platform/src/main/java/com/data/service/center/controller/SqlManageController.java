@@ -4,6 +4,7 @@ import com.data.service.center.client.admin.entity.SqlConfigDO;
 import com.data.service.center.client.admin.request.SqlConfigRequest;
 import com.data.service.center.client.general.entity.BaseResult;
 import com.data.service.center.services.admin.service.SqlManageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ import java.util.List;
 @RequestMapping("/platform/sql")
 public class SqlManageController {
 
+    @Value("${spring.tst:1}")
+    private String tt;
     @Resource
     private SqlManageService sqlManageService;
 
@@ -35,6 +38,7 @@ public class SqlManageController {
 
     @GetMapping("/getAll")
     public BaseResult<List<SqlConfigDO>> getAll() {
+        System.out.println(tt);
         return BaseResult.success(sqlManageService.getEfficientSql());
     }
 }
