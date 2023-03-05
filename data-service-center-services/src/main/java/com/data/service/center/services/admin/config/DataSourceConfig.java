@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -23,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  **/
 @Configuration
 @EnableTransactionManagement
-@MapperScan(value = {"com.data.service.center.dao"}, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(value = {"com.data.service.center.dao.admin.mapper"}, sqlSessionFactoryRef = "sqlSessionFactoryPlatform")
 public class DataSourceConfig {
 
 
@@ -31,37 +33,28 @@ public class DataSourceConfig {
     Class<? extends DataSource> dataSourceType;
 
 
-    @Bean(name = "dataSource")
+    @Bean(name = "dataSourcePlatform")
     @ConfigurationProperties(prefix = "spring.datasource.platform")
     public DataSource dataSource() {
         return DataSourceBuilder.create().type(dataSourceType).build();
     }
 
-    // @Bean
-    // public DynamicDataSource dynamicDataSource() {
-    // DynamicDataSource source = new DynamicDataSource();
-    //
-    // Map<Object, Object> targetDataSources = new HashMap<>();
-    // targetDataSources.put("platform", dataSource());
-    // source.setTargetDataSources(targetDataSources);
-    // return source;
-    // }
-
-    @Bean("sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource,
-        @Autowired DynamicConfiguration configuration) throws Exception {
+    @Bean("sqlSessionFactoryPlatform")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSourcePlatform") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setConfiguration(configuration);
-        // bean.setDataSource(dynamicDataSource());
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml"));
         return bean.getObject();
     }
 
-    // public static class DynamicDataSource extends AbstractRoutingDataSource {
-    // @Override
-    // protected Object determineCurrentLookupKey() {
-    // return "platform";
-    // }
-    // }
+
+    @Bean(name = "transactionManagerPlatform")
+    public DataSourceTransactionManager testTransactionManager(@Qualifier("dataSourcePlatform") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean(name = "sqlSessionTemplatePlatform")
+    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("sqlSessionFactoryPlatform") SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 }

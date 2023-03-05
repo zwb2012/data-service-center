@@ -14,7 +14,6 @@ public class BaseException extends RuntimeException {
 
     private String code;
     private String message;
-    private String userMsg;
 
     public BaseException(String message, Throwable cause) {
         super(message, cause);
@@ -24,29 +23,18 @@ public class BaseException extends RuntimeException {
         super(message);
         this.code = code;
         this.message = message;
-        this.userMsg = "";
     }
 
     public BaseException(GeneralCode responseCode) {
         super(responseCode.getMsg());
         this.code = responseCode.getCode();
         this.message = responseCode.getMsg();
-        this.userMsg = responseCode.getUserMsg();
-    }
-
-
-    public BaseException(String code, String message, String userMsg) {
-        super(message);
-        this.code = code;
-        this.message = message;
-        this.userMsg = userMsg;
     }
 
     public BaseException(GeneralCode responseCode, String extMsg) {
         super(responseCode.getMsg());
         this.code = responseCode.getCode();
         this.message = MessageFormat.format("{0} -> {1}", responseCode.getMsg(), extMsg);
-        this.userMsg = MessageFormat.format("{0} -> {1}", responseCode.getUserMsg(), extMsg);
     }
 
     public String getCode() {
@@ -61,13 +49,5 @@ public class BaseException extends RuntimeException {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getUserMsg() {
-        return userMsg;
-    }
-
-    public void setUserMsg(String userMsg) {
-        this.userMsg = userMsg;
     }
 }

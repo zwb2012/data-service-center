@@ -1,5 +1,7 @@
 package com.data.service.center.client.general.entity;
 
+import com.data.service.center.client.admin.exception.DefaultResponseCode;
+import com.data.service.center.client.admin.exception.GeneralCode;
 import com.data.service.center.client.general.constant.IResultCode;
 import com.data.service.center.client.general.constant.ResultCode;
 import lombok.Getter;
@@ -43,11 +45,12 @@ public class BaseResult<T> implements Serializable {
         this.data = data;
     }
 
+
     /**
      * 成功返回结果
      */
     public static <T> BaseResult<T> success() {
-        return new BaseResult<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
+        return new BaseResult<>(DefaultResponseCode.SUCCESS.getCode(), DefaultResponseCode.SUCCESS.getMsg(), null);
     }
 
     /**
@@ -56,7 +59,7 @@ public class BaseResult<T> implements Serializable {
      * @param data 获取的数据
      */
     public static <T> BaseResult<T> success(T data) {
-        return new BaseResult<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
+        return new BaseResult<>(DefaultResponseCode.SUCCESS.getCode(), DefaultResponseCode.SUCCESS.getMsg(), data);
     }
 
     /**
@@ -66,7 +69,7 @@ public class BaseResult<T> implements Serializable {
      * @param message 提示信息
      */
     public static <T> BaseResult<T> success(T data, String message) {
-        return new BaseResult<>(ResultCode.SUCCESS.getCode(), message, data);
+        return new BaseResult<>(DefaultResponseCode.SUCCESS.getCode(), message, data);
     }
 
     /**
@@ -74,8 +77,8 @@ public class BaseResult<T> implements Serializable {
      *
      * @param errorCode 错误码
      */
-    public static <T> BaseResult<T> failed(IResultCode errorCode) {
-        return new BaseResult<>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> BaseResult<T> failed(GeneralCode errorCode) {
+        return new BaseResult<>(errorCode.getCode(), errorCode.getMsg(), null);
     }
 
     /**
@@ -84,7 +87,7 @@ public class BaseResult<T> implements Serializable {
      * @param errorCode 错误码
      * @param message   错误信息
      */
-    public static <T> BaseResult<T> failed(IResultCode errorCode, String message) {
+    public static <T> BaseResult<T> failed(GeneralCode errorCode, String message) {
         return new BaseResult<>(errorCode.getCode(), message, null);
     }
 
@@ -111,14 +114,14 @@ public class BaseResult<T> implements Serializable {
      * 失败返回结果
      */
     public static <T> BaseResult<T> failed() {
-        return failed(ResultCode.FAILED);
+        return failed(DefaultResponseCode.SERVER_ERROR);
     }
 
     /**
      * 参数验证失败返回结果
      */
     public static <T> BaseResult<T> validateFailed() {
-        return failed(ResultCode.VALIDATE_FAILED);
+        return failed(DefaultResponseCode.INVALID_ARGUMENT);
     }
 
     /**
@@ -127,7 +130,7 @@ public class BaseResult<T> implements Serializable {
      * @param message 提示信息
      */
     public static <T> BaseResult<T> validateFailed(String message) {
-        return new BaseResult<>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+        return new BaseResult<>(DefaultResponseCode.INVALID_ARGUMENT.getCode(), message, null);
     }
 
     /**
@@ -138,19 +141,4 @@ public class BaseResult<T> implements Serializable {
     public static <T> BaseResult<T> result(IResultCode errorCode) {
         return new BaseResult<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
-
-    /**
-     * 未登录返回结果
-     */
-    public static <T> BaseResult<T> unauthorized(T data) {
-        return new BaseResult<>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
-    }
-
-    /**
-     * 未授权返回结果
-     */
-    public static <T> BaseResult<T> forbidden(T data) {
-        return new BaseResult<>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
-    }
-
 }

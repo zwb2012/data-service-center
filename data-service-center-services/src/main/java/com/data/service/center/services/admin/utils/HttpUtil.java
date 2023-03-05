@@ -1,8 +1,8 @@
 package com.data.service.center.services.admin.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.data.service.center.client.admin.exception.BaseException;
-import com.data.service.center.client.admin.exception.ExtensionResponseCode;
+import com.data.service.center.client.admin.exception.BusinessException;
+import com.data.service.center.client.admin.exception.BusinessResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -54,7 +54,7 @@ public class HttpUtil {
         return RequestConfig.custom().setSocketTimeout(TIME_OUT).setConnectTimeout(TIME_OUT).setConnectionRequestTimeout(TIME_OUT);
     }
 
-    public static <T> T postForJson(String uri, String param, Class<T> clazz) throws BaseException {
+    public static <T> T postForJson(String uri, String param, Class<T> clazz) throws BusinessException {
         // 定义httpClient和response
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
@@ -84,12 +84,12 @@ public class HttpUtil {
             return trans2Object(responseContent, clazz);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            throw new BusinessException(BusinessResponseCode.REMOTE_HTTP_ERROR);
         } finally {
             // 关闭流
             closeStream(response);
             closeStream(httpClient);
         }
-        return null;
     }
 
     public static <T> T getForObject(String uri, Class<T> clazz) {
@@ -117,7 +117,7 @@ public class HttpUtil {
             return trans2Object(responseContent, clazz);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw new BaseException(ExtensionResponseCode.REMOTE_HTTP_ERROR);
+            throw new BusinessException(BusinessResponseCode.REMOTE_HTTP_ERROR);
         } finally {
             // 关闭流
             closeStream(response);
@@ -131,7 +131,7 @@ public class HttpUtil {
             try {
                 return JSON.parseObject(content, clazz);
             } catch (Exception e) {
-                throw new BaseException(ExtensionResponseCode.REMOTE_HTTP_ERROR);
+                throw new BusinessException(BusinessResponseCode.REMOTE_HTTP_ERROR);
             }
         }
         return null;

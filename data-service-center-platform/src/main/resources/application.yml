@@ -1,12 +1,12 @@
+server:
+  port: 8080
 spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
   profiles:
     active: local
   application:
     name: data-service-center
-  server:
-    port: 8080
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
   main:
     allow-bean-definition-overriding: true
   jackson:

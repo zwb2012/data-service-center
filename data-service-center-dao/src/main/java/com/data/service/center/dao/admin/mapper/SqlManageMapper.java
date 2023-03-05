@@ -1,6 +1,6 @@
 package com.data.service.center.dao.admin.mapper;
 
-import com.data.service.center.client.admin.entity.SqlDO;
+import com.data.service.center.client.admin.entity.SqlConfigDO;
 import com.data.service.center.dao.general.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023/03/02:22:46
  */
 @Mapper
-public interface SqlManageMapper extends BaseMapper<SqlDO> {
+public interface SqlManageMapper extends BaseMapper<SqlConfigDO> {
 
 
 }

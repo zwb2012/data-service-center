@@ -43,4 +43,4 @@ spring:
 logging:
   config: classpath:logback-local.xml
   level:
-#      com.tims.activity.dao.base: debug
+     com.data.service.center.dao.admin.mapper: debug

@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * 数据库基础类
  *
@@ -21,8 +26,10 @@ public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 777007238610362121L;
 
     /**
-     * id
+     * id, 自增
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

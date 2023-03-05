@@ -1,5 +1,7 @@
 package com.data.service.center.client.admin.exception;
 
+import com.data.service.center.client.general.constant.StringConstant;
+
 /**
  * Title: AbstractGeneralCode <br/>
  * Description: AbstractGeneralCode <br/>
@@ -13,7 +15,7 @@ public abstract class AbstractGeneralCode implements GeneralCode {
     @Override
     public int getHttpStatus() {
         String code = getCode();
-        if (null != code && code.length() == 4 && code.startsWith("0")) {
+        if (null != code && code.length() == 4 && code.startsWith(StringConstant.ZERO_STR)) {
             return Integer.parseInt(code);
         } else {
             return 500;

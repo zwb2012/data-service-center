@@ -51,7 +51,7 @@ public interface GeneralCode extends Serializable {
      *
      * @return userMsg
      */
-    String getUserMsg();
+    String getErrMsg();
 
     /**
      * 返回HttpStatus

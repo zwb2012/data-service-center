@@ -37,12 +37,12 @@ public class DefaultResponseCode extends AbstractGeneralCode {
 
     private String code;
     private String msg;
-    private String userMsg;
+    private String errMsg;
 
-    public DefaultResponseCode(String code, String msg, String userMsg) {
+    public DefaultResponseCode(String code, String msg, String errMsg) {
         this.code = code;
         this.msg = msg;
-        this.userMsg = userMsg;
+        this.errMsg = errMsg;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class DefaultResponseCode extends AbstractGeneralCode {
     }
 
     @Override
-    public String getUserMsg() {
-        return userMsg;
+    public String getErrMsg() {
+        return errMsg;
     }
 
-    public void setUserMsg(String userMsg) {
-        this.userMsg = userMsg;
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
     }
 }
