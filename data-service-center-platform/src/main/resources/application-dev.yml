@@ -1,6 +1,6 @@
 nacos:
   address: localhost:8848
-  namespace: 27e4ff08-0794-47b2-a6e9-71038237187c
+  namespace: dc97f86e-a551-4334-9093-67442ffb486e
 
 dubbo:
   registry:

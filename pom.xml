@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>data-service-center-platform</module>
-        <module>data-service-center-services</module>
         <module>data-service-center-client</module>
         <module>data-service-center-dao</module>
+        <module>data-service-center-services</module>
+        <module>data-service-center-platform</module>
     </modules>
 
     <groupId>com.datas.service.center</groupId>
@@ -42,6 +42,7 @@
         <dubbo.version>2.7.9</dubbo.version>
         <guava.version>30.1.1-jre</guava.version>
         <gson.version>2.8.9</gson.version>
+        <maven-pmd-plugin.version>3.8</maven-pmd-plugin.version>
     </properties>
 
     <dependencies>
@@ -228,10 +229,6 @@
                     <exclusion>
                         <artifactId>log4j</artifactId>
                         <groupId>log4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>dubbo-common</artifactId>
-                        <groupId>org.apache.dubbo</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -432,17 +429,17 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <delimiters>
-                        <delimiter>@</delimiter>
-                    </delimiters>
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-resources-plugin</artifactId>-->
+<!--                <version>3.2.0</version>-->
+<!--                <configuration>-->
+<!--                    <delimiters>-->
+<!--                        <delimiter>@</delimiter>-->
+<!--                    </delimiters>-->
+<!--                    <useDefaultDelimiters>false</useDefaultDelimiters>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
             <!-- 依赖管理 -->
             <plugin>

@@ -8,6 +8,7 @@ import com.data.service.center.client.admin.entity.DataSourceConfigDO;
 import com.data.service.center.client.general.entity.BaseResult;
 import com.data.service.center.services.admin.service.DataSourceManageService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/platform/dataSource")
 public class DataSourceManageController {
+
+    @Value("${spring.tst:1}")
+    private String tt;
+
+
     @Resource
     private DataSourceManageService dataSourceManageService;
 

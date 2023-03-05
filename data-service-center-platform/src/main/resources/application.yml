@@ -1,8 +1,6 @@
 server:
   port: 8080
 spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
   profiles:
     active: local
   application:
@@ -16,7 +14,6 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
-
   #加载nacos公共配置
   cloud:
     nacos:
