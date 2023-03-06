@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * @date: 2023/3/3 15:56
  **/
 public class DynamicDataSource extends AbstractRoutingDataSource {
+    public DynamicDataSource() {}
 
     protected Object determineCurrentLookupKey() {
         return "platform";

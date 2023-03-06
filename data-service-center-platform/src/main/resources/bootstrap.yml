@@ -57,23 +57,55 @@ spring:
         max-retry: 3
         refresh-enabled: true
         extension-configs:
-          - data-id: biz-service-center.yml
+          - data-id: data-service-center.yml
             group: BIZ_GROUP
             refresh: true
 #  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    url: jdbc:mysql://localhost:3306/data-service-center?useUnicode=true&characterEncoding=utf-8
 #    username: root
 #    password: 123456
 #    druid:
-#      initial-size: 5 #连接池初始化大小
-#      min-idle: 10 #最小空闲连接数
-#      max-active: 20 #最大连接数
+#        initial-size: 5 #连接池初始化大小
+#        min-idle: 10 #最小空闲连接数
+#        max-active: 20 #最大连接数
+#        max-wait: 3000
+#        time-between-eviction-runsMillis: 60000
+#        min-evictable-idle-timeMillis: 300000
+#        validation-query: SELECT 1
+#        test-while-idle: true
+#        test-on-borrow: false
+#        test-on-return: false
+#        pool-prepared-statements: false
+#        max-open-prepared-statements: -1
 #      web-stat-filter:
 #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
 #      stat-view-servlet: #访问监控网页的登录用户名和密码
 #        login-username: druid
 #        login-password: druid
+
+#datasource:
+#  platform:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      filters:
+#      max-active: 20
+#      initial-size: 5
+#      max-wait: 3000
+#      minIdle: 10
+#      time-between-eviction-runsMillis: 60000
+#      min-evictable-idle-timeMillis: 300000
+#      validation-query: SELECT 1
+#      test-while-idle: true
+#      test-on-borrow: false
+#      test-on-return: false
+#      pool-prepared-statements: false
+#      max-open-prepared-statements: -1
+#    jdbc-url: jdbc:mysql://localhost:3306/data-service-center?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&testWhileIdle=true&allowPublicKeyRetrieval=true
+#    username: root
+#    password: "123456"
 
 
 dubbo:

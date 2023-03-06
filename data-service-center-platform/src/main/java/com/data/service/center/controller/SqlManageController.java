@@ -3,7 +3,10 @@ package com.data.service.center.controller;
 import com.data.service.center.client.admin.entity.SqlConfigDO;
 import com.data.service.center.client.admin.request.SqlConfigRequest;
 import com.data.service.center.client.general.entity.BaseResult;
+import com.data.service.center.client.general.enums.SqlAndSourceStatusEnum;
 import com.data.service.center.services.admin.service.SqlManageService;
+import com.data.service.center.services.admin.tools.SqlConfigChecker;
+import com.data.service.center.services.admin.utils.BeanCloneUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +35,12 @@ public class SqlManageController {
 
     @PostMapping
     public BaseResult<Object> addSql(@Validated @RequestBody SqlConfigRequest sqlRequest) {
-        sqlManageService.addSql(sqlRequest);
+        SqlConfigDO sqlDO = BeanCloneUtils.clone(sqlRequest, SqlConfigDO.class);
+        // sql配置检查, 并确定执行sql类型
+        SqlConfigChecker.checkerSqlConfig(sqlDO);
+        // 默认sql配置有效性
+        sqlDO.setStatus(SqlAndSourceStatusEnum.EFFECTIVE.getStatus());
+        sqlManageService.addSql(sqlDO);
         return BaseResult.success();
     }
 

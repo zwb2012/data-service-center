@@ -26,6 +26,6 @@ public class DataSourceManageController {
 
     @GetMapping("/getAll")
     public BaseResult<List<DataSourceConfigDO>> getAll() {
-        return BaseResult.success(dataSourceManageService.getAllDataSources());
+        return BaseResult.success(dataSourceManageService.getEfficientDataSources());
     }
 }

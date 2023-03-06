@@ -15,5 +15,5 @@ public interface DataSourceManageService {
      * 
      * @return 数据源列表
      */
-    List<DataSourceConfigDO> getAllDataSources();
+    List<DataSourceConfigDO> getEfficientDataSources();
 }

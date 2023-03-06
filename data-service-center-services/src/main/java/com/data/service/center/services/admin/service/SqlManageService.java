@@ -1,9 +1,8 @@
 package com.data.service.center.services.admin.service;
 
-import com.data.service.center.client.admin.entity.SqlConfigDO;
-import com.data.service.center.client.admin.request.SqlConfigRequest;
-
 import java.util.List;
+
+import com.data.service.center.client.admin.entity.SqlConfigDO;
 
 /**
  * sql管理
@@ -16,10 +15,9 @@ public interface SqlManageService {
     /**
      * 增加执行的sql
      *
-     * @param sqlRequest sql配置内容
-     * @return 影响行数
+     * @param sqlConfigDO sql配置内容
      */
-    int addSql(SqlConfigRequest sqlRequest);
+    void addSql(SqlConfigDO sqlConfigDO);
 
     /**
      * 获取有效的sql配置
