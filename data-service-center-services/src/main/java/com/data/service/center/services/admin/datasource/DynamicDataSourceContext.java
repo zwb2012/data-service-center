@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -39,6 +40,14 @@ public class DynamicDataSourceContext {
 
     protected ScheduledExecutorService dataSourceEventExecutor;
 
+    public DynamicDataSourceContext() {
+        dataSourceEventExecutor = new ScheduledThreadPoolExecutor(1, r -> {
+            Thread t = new Thread(r);
+            t.setDaemon(true);
+            t.setName("com.data.service.center.datasource.timer");
+            return t;
+        });
+    }
 
     @PostConstruct
     public void init() {

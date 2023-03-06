@@ -27,7 +27,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan(value = {"com.data.service.center.dao.admin.mapper"}, sqlSessionFactoryRef = "sqlSessionFactoryPlatform")
 public class DataSourceConfig {
 
-
     @Value("${spring.datasource.type}")
     Class<? extends DataSource> dataSourceType;
 

@@ -16,4 +16,10 @@ public interface DataSourceManageService {
      * @return 数据源列表
      */
     List<DataSourceConfigDO> getEfficientDataSources();
+
+    /**
+     * 新增数据源
+     * @param dataSourceConfigDO 数据源
+     */
+    void addDataSource(DataSourceConfigDO dataSourceConfigDO);
 }

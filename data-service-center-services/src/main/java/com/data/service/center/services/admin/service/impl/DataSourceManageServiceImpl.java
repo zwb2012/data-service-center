@@ -26,4 +26,9 @@ public class DataSourceManageServiceImpl implements DataSourceManageService {
         criteria.andEqualTo("status", SqlAndSourceStatusEnum.EFFECTIVE.getStatus());
         return dataSourceManageMapper.selectAll();
     }
+
+    @Override
+    public void addDataSource(DataSourceConfigDO dataSourceConfigDO) {
+        dataSourceManageMapper.insertSelective(dataSourceConfigDO);
+    }
 }

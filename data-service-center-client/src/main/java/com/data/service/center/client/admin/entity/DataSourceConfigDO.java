@@ -1,11 +1,11 @@
 package com.data.service.center.client.admin.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.Column;
-import javax.persistence.Table;
 
 /**
  * 配置的数据源

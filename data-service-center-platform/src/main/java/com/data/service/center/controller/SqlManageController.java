@@ -28,12 +28,10 @@ import java.util.List;
 @RequestMapping("/platform/sql")
 public class SqlManageController {
 
-    @Value("${spring.tst:1}")
-    private String tt;
     @Resource
     private SqlManageService sqlManageService;
 
-    @PostMapping
+    @PostMapping("/addSql")
     public BaseResult<Object> addSql(@Validated @RequestBody SqlConfigRequest sqlRequest) {
         SqlConfigDO sqlDO = BeanCloneUtils.clone(sqlRequest, SqlConfigDO.class);
         // sql配置检查, 并确定执行sql类型
@@ -46,7 +44,6 @@ public class SqlManageController {
 
     @GetMapping("/getAll")
     public BaseResult<List<SqlConfigDO>> getAll() {
-        System.out.println(tt);
         return BaseResult.success(sqlManageService.getEfficientSql());
     }
 }

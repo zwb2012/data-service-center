@@ -48,7 +48,7 @@ public class DynamicSqlContext {
 
     private final BlockingQueue<SqlConfigDO> tasks = new LinkedBlockingQueue<>(1024);
 
-    protected ScheduledExecutorService clientEventExecutor;
+    protected ScheduledExecutorService sqlEventExecutor;
 
     public static final String NAME_SPACE = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
         + "<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\" >"
@@ -62,10 +62,10 @@ public class DynamicSqlContext {
     }
 
     public DynamicSqlContext() {
-        clientEventExecutor = new ScheduledThreadPoolExecutor(2, r -> {
+        sqlEventExecutor = new ScheduledThreadPoolExecutor(1, r -> {
             Thread t = new Thread(r);
             t.setDaemon(true);
-            t.setName("com.data.service.center.timer");
+            t.setName("com.data.service.center.sql.timer");
             return t;
         });
     }
@@ -79,8 +79,8 @@ public class DynamicSqlContext {
         }
 
         // 启动守护线程执行sql变更操作
-        clientEventExecutor.submit(() -> {
-            while (!clientEventExecutor.isTerminated() && !clientEventExecutor.isShutdown()) {
+        sqlEventExecutor.submit(() -> {
+            while (!sqlEventExecutor.isTerminated() && !sqlEventExecutor.isShutdown()) {
                 try {
                     SqlConfigDO sqlConfig = tasks.take();
                     log.info("begin refreshLoadMst {}", sqlConfig);
