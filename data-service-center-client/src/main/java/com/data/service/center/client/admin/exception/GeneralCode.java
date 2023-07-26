@@ -1,9 +1,9 @@
 package com.data.service.center.client.admin.exception;
 
+import java.io.Serializable;
+
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.io.Serializable;
 
 /**
  * Title: GeneralCode <br/>
@@ -25,7 +25,7 @@ public interface GeneralCode extends Serializable {
      * c:子系统编号
      * d:错误码编号，0000-0999作为通用错误码预留，业务自定义从1000开始
      */
-    String SELF_FRAMEWORK_ERROR_CODE_PREFIX = "00150512";
+    String SELF_FRAMEWORK_ERROR_CODE_PREFIX = "00001000";
 
     /**
      * 通用错误码前缀

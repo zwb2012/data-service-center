@@ -1,5 +1,6 @@
 package com.data.service.center.client.admin.entity;
 
+import com.data.service.center.client.admin.enums.SqlAndSourceStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,7 +43,7 @@ public class SqlConfigDO extends BaseEntity {
 
     /**
      * 状态
-     * @see com.data.service.center.client.general.enums.SqlAndSourceStatusEnum
+     * @see SqlAndSourceStatusEnum
      */
     private Integer status;
 }

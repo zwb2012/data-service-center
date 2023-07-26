@@ -16,7 +16,6 @@ import com.data.service.center.client.admin.entity.SqlConfigDO;
 import com.data.service.center.client.admin.exception.BusinessException;
 import com.data.service.center.client.admin.exception.BusinessResponseCode;
 import com.data.service.center.client.admin.exception.DefaultResponseCode;
-import com.data.service.center.client.general.enums.SqlTypeEnum;
 import com.data.service.center.services.admin.config.DynamicConfiguration;
 import com.data.service.center.services.admin.service.SqlManageService;
 
@@ -55,10 +54,10 @@ public class DynamicSqlContext {
         + "<mapper namespace=\"{nameSpace}\"> {DO_SQL} </mapper>";
 
     static {
-        SQL_TYPE_MAP.put(SqlTypeEnum.DELETE.name(), "<delete id=\"{sqlId}\">{sql_content}</delete>");
-        SQL_TYPE_MAP.put(SqlTypeEnum.INSERT.name(), "<insert id=\"{sqlId}\">{sql_content}</insert>");
-        SQL_TYPE_MAP.put(SqlTypeEnum.UPDATE.name(), "<update id=\"{sqlId}\">{sql_content}</update>");
-        SQL_TYPE_MAP.put(SqlTypeEnum.SELECT.name(), "<select id=\"{sqlId}\">{sql_content}</select>");
+//        SQL_TYPE_MAP.put(SqlTypeEnum.DELETE.name(), "<delete id=\"{sqlId}\">{sql_content}</delete>");
+//        SQL_TYPE_MAP.put(SqlTypeEnum.INSERT.name(), "<insert id=\"{sqlId}\">{sql_content}</insert>");
+//        SQL_TYPE_MAP.put(SqlTypeEnum.UPDATE.name(), "<update id=\"{sqlId}\">{sql_content}</update>");
+//        SQL_TYPE_MAP.put(SqlTypeEnum.SELECT.name(), "<select id=\"{sqlId}\">{sql_content}</select>");
     }
 
     public DynamicSqlContext() {
@@ -117,7 +116,7 @@ public class DynamicSqlContext {
                 new XMLMapperBuilder(resource.getInputStream(), dynamicConfiguration, sourceSqlId, dynamicConfiguration.getSqlFragments());
             xmlMapperBuilder.parse();
         } catch (Exception e) {
-            throw new BusinessException(BusinessResponseCode.SQL_PARSER_ERROR);
+            throw new BusinessException(BusinessResponseCode.SERVER_ERROR);
         }
     }
 

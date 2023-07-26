@@ -49,7 +49,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      */
     public static final String FORMAT4 = "yyyyMMdd";
 
-    private static String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", FORMAT2, "HHmmss"};
+    private static final String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", FORMAT2, "HHmmss"};
 
     private static final String DAY = "天";
 

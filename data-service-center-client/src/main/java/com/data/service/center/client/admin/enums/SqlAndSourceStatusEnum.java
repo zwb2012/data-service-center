@@ -1,4 +1,4 @@
-package com.data.service.center.client.general.enums;
+package com.data.service.center.client.admin.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.data.service.center.client.general.constant;
+package com.data.service.center.client.admin.constant;
 
 /**
  * 数字常量

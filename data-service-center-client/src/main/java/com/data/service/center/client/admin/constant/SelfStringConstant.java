@@ -1,4 +1,4 @@
-package com.data.service.center.client.general.constant;
+package com.data.service.center.client.admin.constant;
 
 /**
  * 字符串常量
@@ -6,7 +6,7 @@ package com.data.service.center.client.general.constant;
  * @author : wenbo.zhuang
  * @date: 2023/3/3 13:36
  **/
-public interface StringConstant {
+public interface SelfStringConstant {
 
     String UTF_8 = "UTF-8";
 

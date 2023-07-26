@@ -1,14 +1,13 @@
-package com.data.service.center.client.general.entity;
+package com.data.service.center.client.admin.entity;
+
+import java.io.Serializable;
 
 import com.data.service.center.client.admin.exception.DefaultResponseCode;
 import com.data.service.center.client.admin.exception.GeneralCode;
-import com.data.service.center.client.general.constant.IResultCode;
-import com.data.service.center.client.general.constant.ResultCode;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.io.Serializable;
 
 /**
  * 通用响应结果
@@ -36,8 +35,7 @@ public class BaseResult<T> implements Serializable {
      */
     private T data;
 
-    protected BaseResult() {
-    }
+    protected BaseResult() {}
 
     protected BaseResult(String code, String message, T data) {
         this.code = code;
@@ -65,7 +63,7 @@ public class BaseResult<T> implements Serializable {
     /**
      * 成功返回结果
      *
-     * @param data    获取的数据
+     * @param data 获取的数据
      * @param message 提示信息
      */
     public static <T> BaseResult<T> success(T data, String message) {
@@ -85,7 +83,7 @@ public class BaseResult<T> implements Serializable {
      * 失败返回结果
      *
      * @param errorCode 错误码
-     * @param message   错误信息
+     * @param message 错误信息
      */
     public static <T> BaseResult<T> failed(GeneralCode errorCode, String message) {
         return new BaseResult<>(errorCode.getCode(), message, null);
@@ -94,7 +92,7 @@ public class BaseResult<T> implements Serializable {
     /**
      * 失败返回结果
      *
-     * @param code    错误码
+     * @param code 错误码
      * @param message 提示信息
      */
     public static <T> BaseResult<T> failed(String code, String message) {
@@ -107,7 +105,7 @@ public class BaseResult<T> implements Serializable {
      * @param message 提示信息
      */
     public static <T> BaseResult<T> failed(String message) {
-        return new BaseResult<>(ResultCode.FAILED.getCode(), message, null);
+        return new BaseResult<>(DefaultResponseCode.SERVER_ERROR.getCode(), message, null);
     }
 
     /**
@@ -138,7 +136,7 @@ public class BaseResult<T> implements Serializable {
      *
      * @param errorCode 返回码
      */
-    public static <T> BaseResult<T> result(IResultCode errorCode) {
-        return new BaseResult<>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> BaseResult<T> result(DefaultResponseCode errorCode) {
+        return new BaseResult<>(errorCode.getCode(), errorCode.getErrMsg(), null);
     }
 }

@@ -2,9 +2,9 @@ server:
   port: ${PORT:8080}
   shutdown: graceful #immediate  //直接关闭，graceful：优雅关机
 
-nacos:
-  address: ${NACOS_ADDR:localhost:8848}
-  namespace: ${NACOS_NAMESPACE:data-service-center}
+#nacos:
+#  address: ${NACOS_ADDR:localhost:8848}
+#  namespace: ${NACOS_NAMESPACE:data-service-center}
 
 spring:
   profiles:
@@ -21,45 +21,45 @@ spring:
       max-file-size: 10MB
       max-request-size: 100MB
   #加载nacos公共配置
-  cloud:
-    nacos:
-      # 注册地址，不需要写协议
-      server-addr: ${NACOS_ADDR:localhost:8848}
-      username: ${NACOS_USERNAME:nacos}
-      password: ${NACOS_PASSWORD:nacos}
-      discovery:
-        enabled: true
-        # 注册地址，不需要写协议
-        server-addr: ${nacos.address}
-        # 命名空间，不同命名空间之间不能调用，用于环境隔离
-        namespace: ${nacos.namespace}
-        # 分组，不同分组之间不能调用，用于微服务之间的隔离
-        group: DEFAULT_GROUP
-        # 集群名称【有 BJ 和 NJ】，不同集群之间可以调用，但是在设计负载均衡策略的时候要避免跨机房集群调用
-        # cluster-name: BJ
-        # 元数据，让配置更加灵活
-        # metadata:
-        # 比如灰度发布时，可以跨集群调用，但是不能跨版本调用
-        # version: v1
-      config:
-        enabled: true
-        # 配置中心地址，不需要写协议
-        server-addr: ${nacos.address}
-        # 配置文件扩展后缀
-        file-extension: yml
-        # 命名空间，不同命名空间之间不能调用，用于环境隔离
-        namespace: ${nacos.namespace}
-        context-path: ${NACOS_CONTEXT_PATH:nacos}
-        # 分组，不同分组之间不能调用，用于微服务之间的隔离
-        group: DEFAULT_GROUP
-        encode: "UTF-8"
-        # 最大重试次数
-        max-retry: 3
-        refresh-enabled: true
-        extension-configs:
-          - data-id: data-service-center.yml
-            group: BIZ_GROUP
-            refresh: true
+#  cloud:
+#    nacos:
+#      # 注册地址，不需要写协议
+#      server-addr: ${NACOS_ADDR:localhost:8848}
+#      username: ${NACOS_USERNAME:nacos}
+#      password: ${NACOS_PASSWORD:nacos}
+#      discovery:
+#        enabled: true
+#        # 注册地址，不需要写协议
+#        server-addr: ${nacos.address}
+#        # 命名空间，不同命名空间之间不能调用，用于环境隔离
+#        namespace: ${nacos.namespace}
+#        # 分组，不同分组之间不能调用，用于微服务之间的隔离
+#        group: DEFAULT_GROUP
+#        # 集群名称【有 BJ 和 NJ】，不同集群之间可以调用，但是在设计负载均衡策略的时候要避免跨机房集群调用
+#        # cluster-name: BJ
+#        # 元数据，让配置更加灵活
+#        # metadata:
+#        # 比如灰度发布时，可以跨集群调用，但是不能跨版本调用
+#        # version: v1
+#      config:
+#        enabled: true
+#        # 配置中心地址，不需要写协议
+#        server-addr: ${nacos.address}
+#        # 配置文件扩展后缀
+#        file-extension: yml
+#        # 命名空间，不同命名空间之间不能调用，用于环境隔离
+#        namespace: ${nacos.namespace}
+#        context-path: ${NACOS_CONTEXT_PATH:nacos}
+#        # 分组，不同分组之间不能调用，用于微服务之间的隔离
+#        group: DEFAULT_GROUP
+#        encode: "UTF-8"
+#        # 最大重试次数
+#        max-retry: 3
+#        refresh-enabled: true
+#        extension-configs:
+#          - data-id: data-service-center.yml
+#            group: BIZ_GROUP
+#            refresh: true
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
@@ -85,27 +85,26 @@ spring:
 #        login-username: druid
 #        login-password: druid
 
-#datasource:
-#  platform:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    druid:
-#      filters:
-#      max-active: 20
-#      initial-size: 5
-#      max-wait: 3000
-#      minIdle: 10
-#      time-between-eviction-runsMillis: 60000
-#      min-evictable-idle-timeMillis: 300000
-#      validation-query: SELECT 1
-#      test-while-idle: true
-#      test-on-borrow: false
-#      test-on-return: false
-#      pool-prepared-statements: false
-#      max-open-prepared-statements: -1
-#    jdbc-url: jdbc:mysql://localhost:3306/data_service_center?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&testWhileIdle=true&allowPublicKeyRetrieval=true
-#    username: root
-#    password: "123456"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters:
+      max-active: 20
+      initial-size: 5
+      max-wait: 3000
+      minIdle: 10
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-open-prepared-statements: -1
+    jdbc-url: jdbc:mysql://localhost:3306/data_service_center?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&testWhileIdle=true&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
 
 
 dubbo:

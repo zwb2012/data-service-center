@@ -10,10 +10,12 @@ import java.text.MessageFormat;
  * @date 2023/03/03:0:15
  */
 public class BaseException extends RuntimeException {
+
     private static final long serialVersionUID = -4567087136091231834L;
 
-    private String code;
-    private String message;
+    private String errCode;
+
+    private String errMsg;
 
     public BaseException(String message, Throwable cause) {
         super(message, cause);
@@ -21,33 +23,46 @@ public class BaseException extends RuntimeException {
 
     public BaseException(String code, String message) {
         super(message);
-        this.code = code;
-        this.message = message;
+        this.errCode = code;
+        this.errMsg = message;
     }
 
     public BaseException(GeneralCode responseCode) {
         super(responseCode.getMsg());
-        this.code = responseCode.getCode();
-        this.message = responseCode.getMsg();
+        this.errCode = responseCode.getCode();
+        this.errMsg = responseCode.getMsg();
     }
 
-    public BaseException(GeneralCode responseCode, String extMsg) {
-        super(responseCode.getMsg());
-        this.code = responseCode.getCode();
-        this.message = MessageFormat.format("{0} -> {1}", responseCode.getMsg(), extMsg);
+    public BaseException(GeneralCode responseCode, String errMsg) {
+        super(responseCode.getErrMsg());
+        this.errCode = responseCode.getCode();
+        this.errMsg = MessageFormat.format("{0} -> {1}", responseCode.getMsg(), errMsg);
     }
 
-    public String getCode() {
-        return code;
+
+
+    protected BaseException(Throwable cause, GeneralCode responseCode) {
+        super(cause);
+        this.errMsg = responseCode.getCode();
     }
 
+
+    protected BaseException(String errMsg) {
+        super(errMsg);
+        errCode = DefaultResponseCode.SERVER_ERROR.getCode();
+    }
+
+
+    public String getErrCode() {
+        return errCode;
+    }
 
     @Override
     public String getMessage() {
-        return message;
+        return errMsg;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.errMsg = message;
     }
 }

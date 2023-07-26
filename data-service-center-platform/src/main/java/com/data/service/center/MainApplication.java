@@ -2,10 +2,8 @@ package com.data.service.center;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
@@ -18,9 +16,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2022/11/05:19:28
  */
 @Slf4j
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @SpringBootApplication
-@EnableDubbo
+//@EnableDubbo
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 public class MainApplication {
 

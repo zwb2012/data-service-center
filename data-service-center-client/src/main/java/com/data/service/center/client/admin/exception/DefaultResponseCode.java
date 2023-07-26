@@ -4,14 +4,15 @@ import lombok.Builder;
 
 /**
  * Title: DefaultResponseCode <br/>
- * Description: 默认响应码实现  <br/>
+ * Description: 默认响应码实现 <br/>
  *
  * @author wenbo.zhuang
  * @date 2023/03/03:0:19
  */
 @Builder
 public class DefaultResponseCode extends AbstractGeneralCode {
-    private static final long serialVersionUID = -3247440889009160154L;
+
+    private static final long serialVersionUID = -6944931772165074376L;
 
     public static final GeneralCode SUCCESS = new DefaultResponseCode("0", "Success", "成功");
     public static final GeneralCode INVALID_ARGUMENT = new DefaultResponseCode("0400", "Invalid Argument", "无效的参数");
@@ -31,9 +32,8 @@ public class DefaultResponseCode extends AbstractGeneralCode {
     public static final GeneralCode REMOTE_HTTP_ERROR = new DefaultResponseCode("0505", "Remote Http Error", "远程http请求失败");
     public static final GeneralCode CONFIG_ERROR = new DefaultResponseCode("0506", "service config error", "服务配置错误");
 
-
-    public static final GeneralCode UN_KNOWN = new DefaultResponseCode(COMMON_ERROR_CODE_PREFIX + "0001", "Unknown", "Unknown");
-    public static final GeneralCode DATA_DUPLICATE = new DefaultResponseCode(COMMON_ERROR_CODE_PREFIX + "0002", "Duplicate entry key", "数据重复");
+    public static final GeneralCode UN_KNOWN = new DefaultResponseCode(GeneralCode.COMMON_ERROR_CODE_PREFIX + "0001", "Unknown", "Unknown");
+    public static final GeneralCode DATA_DUPLICATE = new DefaultResponseCode(GeneralCode.COMMON_ERROR_CODE_PREFIX + "0002", "Duplicate entry key", "数据重复");
 
     private String code;
     private String msg;
@@ -55,16 +55,8 @@ public class DefaultResponseCode extends AbstractGeneralCode {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     @Override
     public String getErrMsg() {
         return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
     }
 }

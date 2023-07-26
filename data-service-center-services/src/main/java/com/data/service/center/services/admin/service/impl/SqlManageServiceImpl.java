@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.data.service.center.client.admin.entity.SqlConfigDO;
-import com.data.service.center.client.general.enums.SqlAndSourceStatusEnum;
+import com.data.service.center.client.admin.enums.SqlAndSourceStatusEnum;
 import com.data.service.center.dao.admin.mapper.SqlManageMapper;
 import com.data.service.center.services.admin.annotion.SqlRefresh;
 import com.data.service.center.services.admin.service.SqlManageService;

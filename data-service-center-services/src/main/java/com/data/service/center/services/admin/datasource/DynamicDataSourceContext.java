@@ -85,7 +85,7 @@ public class DynamicDataSourceContext {
                 dataSourceMap.put(dataSourceConfig.getNameSpace(), dataSource);
             }
         } catch (Exception e) {
-            throw new BusinessException(BusinessResponseCode.DATA_SOURCE_CONFIG_ERROR);
+            throw new BusinessException(BusinessResponseCode.SERVER_ERROR);
         }
     }
 
